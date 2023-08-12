@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question {{ question_id + 1 }}</title>
+</head>
+<body>
+    <table bgcolor="#6666FF" width="100%">
+        <tr>
+            <td>
+                <h2>Question {{ question_id + 1 }}</h2>
+                <p>{{ question.question }}</p>
+                <form method="POST" action="/questions/{{ question_id }}">
+                    {% for choice in question.choices %}
+                        <input type="radio" name="choice" value="{{ choice }}"> {{ choice }}<br>
+                    {% endfor %}
+                    <input type="submit" value="Submit">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flashes">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
